@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import fetchIngredients from "../Apifunctions/fetchIngredients";
 
-const IngredientList = () => {
+const IngredientList = ({ addingredient }) => {
+  //estados de busqueda de ingredientes
   const [query, setQuery] = useState(""); // Búsqueda por texto
   const [sortType, setSortType] = useState("name"); // Tipo de filtro
   const [ingredients, setIngredients] = useState([]); // Resultados de búsqueda
@@ -42,65 +43,70 @@ const IngredientList = () => {
           INGREDIENTES{" "}
         </h1>
 
-        <div className="w-72 mb-4">
-          <label
-            htmlFor="queryInput"
-            className="block mb-2 text-lg font-medium text-gray-700"
-          >
-            Search Ingredient:
-          </label>
-          <input
-            id="queryInput"
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type an ingredient..."
-            className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+        <div className="flex justify-center items-center gap-2">
+          <div className="flex flex-col">
+            {/* Barra de busquedade ingredientes */}
+            <div className="w-72 mb-1">
+              <label
+                htmlFor="queryInput"
+                className="block mb-2 text-lg font-medium text-white"
+              >
+                Search Ingredient:
+              </label>
+              <input
+                id="queryInput"
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Type an ingredient..."
+                className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-        {/* Dropdown para seleccionar tipo de filtro */}
-        <div className="w-72 mb-4">
-          <label
-            htmlFor="sortDropdown"
-            className="block mb-2 text-lg font-medium text-gray-700"
-          >
-            Sort by:
-          </label>
-          <select
-            id="sortDropdown"
-            value={sortType}
-            onChange={(e) => setSortType(e.target.value)}
-            className="block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          >
-            {sortOptions.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+            {/* Dropdown para seleccionar tipo de filtro */}
+            <div className="w-72 mb-4">
+              <label
+                htmlFor="sortDropdown"
+                className="block mb-2 text-lg font-medium text-white"
+              >
+                Sort by:
+              </label>
+              <select
+                id="sortDropdown"
+                value={sortType}
+                onChange={(e) => setSortType(e.target.value)}
+                className="block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                {sortOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-        {/* Botón de búsqueda */}
-        <button
-          onClick={searchIngredients}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-md transition"
-        >
-          Search
-        </button>
+          {/* Botón de búsqueda */}
+          <button
+            onClick={searchIngredients}
+            className="mt-4  bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-md transition"
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       {/* Error */}
       {error ? (
         <p className="text-red-500 mt-4">{error}</p>
       ) : (
-        <div className="h-3/5 overflow-y-auto mx-2 scrollbar-none">
+        <div className="h-4/6 overflow-y-auto mx-2 scrollbar-none">
           {/* Lista de ingredientes */}
           <ul className="mt-6 space-y-4 w-full ">
             {ingredients.map((ingredient) => (
               <li
                 key={ingredient.id}
-                className="bg-gray-100 p-4 mx-2 rounded-md shadow-sm  text-black text-lg w-4/ flex justify-between items-center"
+                className="bg-gray-100 p-4 mx-2 rounded-md shadow-sm  text-black text-lg w-full flex justify-between items-center"
               >
                 <img
                   src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
@@ -109,7 +115,10 @@ const IngredientList = () => {
                 />
                 <p>{ingredient.name} </p>
                 <p>valor n. = {ingredient.id}</p>
-                <button className="border border-green-950 bg-green-800 hover:bg-green-600 h-8 w-8 text-white rounded-xl">
+                <button
+                  onClick={() => addingredient(ingredient)}
+                  className="border border-green-950 bg-green-800 hover:bg-green-600 h-8 min-w-8 text-white rounded-xl"
+                >
                   <p className="mb-1">+</p>
                 </button>
               </li>
