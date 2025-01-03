@@ -36,29 +36,28 @@ const IngredientList = ({ addingredient }) => {
   };
 
   return (
-    <div className=" bg-slate-300/20 border border-red-400 rounded-xl h-4/5 w-1/5 md:w-2/6 lg:mx-10 md:mx-7 ">
-      <div className="bg-orange-700 rounded-xl h-auto flex flex-col items-center justify-center p-2">
-        <h1 className="text-white text-3xl font-semibold pt-2">
-          {" "}
-          INGREDIENTES{" "}
-        </h1>
+    <div className=" h-5/6 w-2/5 flex flex-col items-center pt-5">
+      <h1 className="text-white text-6xl font-semibold "> INGREDIENTES </h1>
+      <h2 className="text-white text-3xl">Elige tus ingredientes</h2>
+      <div className="mt-1 h-2 w-32 bg-orange-400 lg:-rotate-3" />
 
+      <div className=" h-auto flex flex-col items-center justify-center p-2">
         <div className="flex justify-center items-center gap-2">
-          <div className="flex flex-col">
+          <div className="flex flex-col mt-3">
             {/* Barra de busquedade ingredientes */}
             <div className="w-72 mb-1">
               <label
                 htmlFor="queryInput"
                 className="block mb-2 text-lg font-medium text-white"
               >
-                Search Ingredient:
+                Busca un ingrediente:
               </label>
               <input
                 id="queryInput"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Type an ingredient..."
+                placeholder="Escribe un ingrediente..."
                 className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -69,7 +68,7 @@ const IngredientList = ({ addingredient }) => {
                 htmlFor="sortDropdown"
                 className="block mb-2 text-lg font-medium text-white"
               >
-                Sort by:
+                Categorias:
               </label>
               <select
                 id="sortDropdown"
@@ -89,42 +88,46 @@ const IngredientList = ({ addingredient }) => {
           {/* Botón de búsqueda */}
           <button
             onClick={searchIngredients}
-            className="mt-4  bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-md transition"
+            className="mt-4  bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-6 rounded-md transition"
           >
-            Search
+            BUSCAR
           </button>
         </div>
       </div>
 
       {/* Error */}
       {error ? (
-        <p className="text-red-500 mt-4">{error}</p>
+        <p className="text-red-500 mt-4 text-6xl">{error}</p>
       ) : (
-        <div className="h-4/6 overflow-y-auto mx-2 scrollbar-none">
-          {/* Lista de ingredientes */}
-          <ul className="mt-6 space-y-4 w-full ">
-            {ingredients.map((ingredient) => (
-              <li
-                key={ingredient.id}
-                className="bg-gray-100 p-4 mx-2 rounded-md shadow-sm  text-black text-lg w-full flex justify-between items-center"
-              >
-                <img
-                  src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
-                  alt={ingredient.name}
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <p>{ingredient.name} </p>
-                <p>valor n. = {ingredient.id}</p>
-                <button
-                  onClick={() => addingredient(ingredient)}
-                  className="border border-green-950 bg-green-800 hover:bg-green-600 h-8 min-w-8 text-white rounded-xl"
-                >
-                  <p className="mb-1">+</p>
-                </button>
-              </li>
-            ))}
-          </ul>
+<div className="h-5/6 w-full max-w-xl px-4 mb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/50 scrollbar-track-black/30  rounded-lg shadow-lg">
+  {/* Lista de ingredientes */}
+  <ul className="mt-2 space-y-4 w-full flex flex-col items-center">
+    {ingredients.map((ingredient) => (
+      <li
+        key={ingredient.id}
+        className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center w-full transform transition-transform hover:scale-105"
+      >
+        <div className="flex items-center">
+          <img
+            src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+            alt={ingredient.name}
+            className="w-14 h-14 rounded-full mr-4 border border-gray-200 shadow-sm"
+          />
+          <p className="text-gray-800 font-medium text-lg">{ingredient.name}</p>
         </div>
+        <div className="flex items-center space-x-4">
+          <p className="text-gray-600 text-sm">ID: {ingredient.id}</p>
+          <button
+            onClick={() => addingredient(ingredient)}
+            className="bg-green-600 hover:bg-green-500 text-white font-bold h-8 w-8 flex items-center justify-center rounded-full shadow-md"
+          >
+            +
+          </button>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
       )}
     </div>
   );

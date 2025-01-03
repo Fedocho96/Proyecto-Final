@@ -11,7 +11,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center ">
+    <div className="h-full flex flex-col justify-center items-center ">
       {actualview === "Home" && <Home changeview={changeview} />}
       {actualview === "create-recipe" && <CreateRecipe />}
       {actualview === "recipe-history" && <RecipeHistory />}

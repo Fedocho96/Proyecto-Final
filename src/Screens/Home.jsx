@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = ({ changeview }) => {
   return (
-    <section className="min-h-dvh h-screen w-full flex  items-center justify-evenl ">
+    <section className="h-screen w-full flex  items-center justify-evenl ">
       <div className="gap-2 p-8 w-2/4 h-2/3 flex flex-col items-center justify-center">
         <h1 className="text-yellow-100 text-6xl font-bold">Crea tus propias</h1>
         <h1 className="text-yellow-100 text-6xl font-extrabold">Recetas</h1>

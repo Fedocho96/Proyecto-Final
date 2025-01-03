@@ -27,8 +27,8 @@ const RecipeBuilder = ({ newrecipe, setNewRecipe }) => {
 
   console.log(newrecipe);
   return (
-    <div className=" bg-slate-300/20 border border-red-400 rounded-xl h-4/5 w-1/5 md:w-2/6 lg:mx-10 md:mx-7 ">
-      <div className="bg-orange-700 rounded-xl h-auto flex flex-col items-center justify-center p-2">
+    <div className=" bg-slate-300/20 rounded-xl h-screen w-2/5 md:w-2/6 lg:mx-10 md:mx-7 ">
+      <div className=" rounded-xl h-auto flex flex-col items-center justify-center p-2">
         <h1 className="text-white text-3xl font-semibold pt-2"> CANTIDADES </h1>
       </div>
 
