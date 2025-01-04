@@ -25,42 +25,50 @@ const RecipeBuilder = ({ newrecipe, setNewRecipe }) => {
     });
   };
 
-  console.log(newrecipe);
   return (
-    <div className=" bg-slate-300/20 rounded-xl h-screen w-2/5 md:w-2/6 lg:mx-10 md:mx-7 ">
-      <div className=" rounded-xl h-auto flex flex-col items-center justify-center p-2">
-        <h1 className="text-white text-3xl font-semibold pt-2"> CANTIDADES </h1>
-      </div>
+    <div className=" h-5/6 w-2/5 flex flex-col items-center pt-5 ">
+      <h1 className="text-white text-6xl font-semibold "> CANTIDAD </h1>
+      <h2 className="text-white text-3xl">
+        Elige la cantidad de tus ingredientes
+      </h2>
+      <div className="mt-1 h-2 w-32 bg-orange-400 lg:-rotate-3" />
 
-      <ul className="mt-6 space-y-4 w-full ">
-        {newrecipe.map((ingredient) => (
-          <li
-            key={ingredient.id}
-            className="bg-gray-100 p-4 mx-2 w-auto rounded-md shadow-sm  text-black text-lg flex justify-between items-center"
-          >
-            <img
-              src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
-              alt={ingredient.name}
-              className="w-12 h-12 rounded-full mr-4"
-            />
-            <p>{ingredient.name} </p>
-            <p>vn. = {ingredient.id}</p>
-            <button
-              onClick={() => resqty(ingredient)}
-              className="border border-green-950 bg-green-800 hover:bg-green-600 h-8 min-w-8 text-white rounded-xl"
+      <div className="h-5/6 w-full max-w-xl px-4 mb-4 mt-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/50 scrollbar-track-black/30  rounded-lg shadow-lg">
+        <ul className="space-y-4 w-full flex flex-col items-center">
+          {newrecipe.map((ingredient) => (
+            <li
+              key={ingredient.id}
+              className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center w-full transform transition-transform hover:scale-105"
             >
-              <p className="mb-1">-</p>
-            </button>
-            <p>{ingredient.cantidad}</p>
-            <button
-              onClick={() => addqty(ingredient)}
-              className="border border-green-950 bg-green-800 hover:bg-green-600 h-8 min-w-8 text-white rounded-xl"
-            >
-              <p className="mb-1">+</p>
-            </button>
-          </li>
-        ))}
-      </ul>
+              <div className="flex items-center gap-3 ">
+                <img
+                  src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                  alt={ingredient.name}
+                  className="w-12 h-12 rounded-full mr-4"
+                />
+                <p className="text-gray-800 font-medium text-lg">{ingredient.name} </p>
+                <p className="text-black-600 text-lg">vn. = {ingredient.id}</p>
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => resqty(ingredient)}
+                  className="bg-green-600 hover:bg-green-500 text-white font-bold h-8 w-8 flex items-center justify-center rounded-full shadow-md"
+                >
+                  <p className="mb-1">-</p>
+                </button>
+                <p>{ingredient.cantidad}</p>
+                <button
+                  onClick={() => addqty(ingredient)}
+                  className="bg-green-600 hover:bg-green-500 text-white font-bold h-8 w-8 flex items-center justify-center rounded-full shadow-md"
+                >
+                  <p className="mb-1">+</p>
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

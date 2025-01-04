@@ -1,54 +1,93 @@
 import React from "react";
 
 const RecipeSummary = ({ newrecipe, setNewRecipe }) => {
-  console.log(newrecipe)
+
+
+  const deleteIngredient = (ingredientToDelete) => {
+    setNewRecipe((prevRecipe) => {
+      return prevRecipe.filter((item) => item.id !== ingredientToDelete.id); // Elimina el ingrediente por su ID
+    });
+  };
+
   return (
-    <div className=" bg-slate-300/20 border border-red-400 rounded-xl h-4/5 w-1/5 md:w-2/6 lg:mx-10 md:mx-7 ">
-      <div className="bg-orange-700 rounded-xl h-auto flex flex-col items-center justify-center p-2">
-        <h1 className="text-white text-3xl font-semibold pt-2"> TU RECETA </h1>
-        <input type="text" />
+    <div className=" rounded-xl h-full w-4/5 flex flex-col items-center">
+      <div className="rounded-xl h-auto flex flex-col items-center justify-center p-2">
+        <h1 className="text-white text-7xl font-semibold">
+          Tu <a className="text-orange-400 font-extrabold">RECETA</a>
+        </h1>
+        <h2 className="text-white text-3xl">Elige el nombre para tu receta</h2>
+        <div className="mt-1 h-2 w-44 bg-orange-400 lg:-rotate-1" />
       </div>
 
+      <div className="h-auto flex flex-col items-center justify-center p-2">
+        <div className="flex justify-center items-center gap-2">
+          <div className="flex flex-col mt-3">
+            <div className="w-72 mb-1">
+              <input
+                id="recipeName"
+                type="text"
+                placeholder="Escribe el nombre de tu receta..."
+                className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div className="bg-slate-300/20 rounded-xl h-screen w-full flex flex-col items-center justify-center p-2">   
-        <div className="flex flex-col items-center justify-center gap-2 h-4/5 w-full overflow-y-auto">
+      <div className="relative h-4/5 w-full overflow-hidden rounded-lg shadow-lg">
+        <button
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-r-lg z-10"
+          onClick={() =>
+            (document.querySelector(".carousel").scrollLeft -= 200)
+          }
+        >
+          ‹
+        </button>
+        <div className="carousel h-full overflow-x-auto scroll-smooth scrollbar-hide flex gap-x-4 justify-start items-center">
           {newrecipe.map((ingredient) => (
-            <div className="flex items-center justify-between w-full bg-slate-300/40 rounded-xl p-2">
-              <div className="flex items-center gap-2">
-                <p className="text-white">{ingredient.name}</p>
-                <p className="text-white">{ingredient.cantidad}</p>
-              </div>
-              <button
-                className="bg-red-400 rounded-xl p-1"
-                onClick={() =>
-                  setNewRecipe(
-                    newrecipe.filter((item) => item.id !== ingredient.id)
-                  )
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+            <div
+              key={ingredient.id}
+              className="bg-white h-4/5 p-4 rounded-lg shadow-md flex flex-col items-center justify-between transform transition-transform hover:scale-105 flex-shrink-0 w-48"
+            >
+              <img
+                src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                alt={ingredient.name}
+                className="w-24 h-24 rounded-full mb-3"
+              />
+              <p className="text-gray-800 font-medium text-lg text-center">
+                {ingredient.name}
+              </p>
+              <p className="text-gray-800 font-medium text-lg text-center">
+                Cantidad: 
+                <p className="text-xl">{ingredient.cantidad}</p>
+              </p>
+              <p className="text-black-600 text-center text-xl">
+                vn. = {ingredient.id}
+              </p>
+              <div className="flex items-center space-x-4 mt-2">
+                <button
+                  className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 flex items-center justify-center rounded-full shadow-md"
+                  onClick={() => deleteIngredient(ingredient)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+                  Eliminar
+                </button>
+              </div>
             </div>
           ))}
         </div>
-
-        <button className="bg-orange-700 rounded-xl p-2 w-4/5">
-          <p className="text-white">Crear receta</p>
+        <button
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-l-lg z-10"
+          onClick={() =>
+            (document.querySelector(".carousel").scrollLeft += 200)
+          }
+        >
+          ›
         </button>
-    </div>
+      </div>
+
+      <button className="my-5 bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-6 rounded-md transition">
+        CREAR RECETA
+      </button>
     </div>
   );
 };

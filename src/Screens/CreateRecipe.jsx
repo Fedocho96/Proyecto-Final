@@ -18,19 +18,23 @@ const CreateRecipe = () => {
 
   return (
     <section className="h-full w-full flex flex-col items-center justify-center gap-3 ">
-      <h1 className="text-white text-8xl mt-3 mb-2">Comienza a crear tu RECETA</h1>
+      <h1 className="text-white text-8xl mt-3 mb-2">
+        Comienza a crear tu{" "}
+        <a className=" text-orange-400 font-extrabold">RECETA</a>
+      </h1>
       <div className="h-screen w-full flex justify-around gap-3  ">
+        {/*Tarjeta de seleccion de ingredientes*/}
+        <IngredientList addingredient={addingredient} />
 
-      {/*Tarjeta de seleccion de ingredientes*/}
-      <IngredientList addingredient={addingredient} />
-
-      {/*Tarjeta de seleccion de cantidad*/}
-      <RecipeBuilder newrecipe={newrecipe} setNewRecipe={setNewRecipe} />
+        {/*Tarjeta de seleccion de cantidad*/}
+        <RecipeBuilder newrecipe={newrecipe} setNewRecipe={setNewRecipe} />
       </div>
 
       {/*Tarjeta de seleccion de nombre y creacion de receta*/}
-      <RecipeSummary newrecipe={newrecipe} setNewRecipe={setNewRecipe}/>    
-      </section>
+      <div className="h-screen w-full flex justify-center">
+        <RecipeSummary newrecipe={newrecipe} setNewRecipe={setNewRecipe} />
+      </div>
+    </section>
   );
 };
 

@@ -116,7 +116,7 @@ const IngredientList = ({ addingredient }) => {
           <p className="text-gray-800 font-medium text-lg">{ingredient.name}</p>
         </div>
         <div className="flex items-center space-x-4">
-          <p className="text-gray-600 text-sm">ID: {ingredient.id}</p>
+          <p className="text-gray-600 text-sm">V.N: {ingredient.id}</p>
           <button
             onClick={() => addingredient(ingredient)}
             className="bg-green-600 hover:bg-green-500 text-white font-bold h-8 w-8 flex items-center justify-center rounded-full shadow-md"
