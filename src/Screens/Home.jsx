@@ -2,8 +2,8 @@ import React from "react";
 
 const Home = ({ changeview }) => {
   return (
-    <section className="h-screen w-full flex  items-center justify-evenl ">
-      <div className="gap-2 p-8 w-2/4 h-2/3 flex flex-col items-center justify-center">
+    <section className="h-screen w-full flex  items-center justify-evenly ">
+      <div className="gap-2 p-8 w-2/4 h-2/3 flex flex-col items-center justify-center text-center">
         <h1 className="text-yellow-100 text-6xl font-bold">Crea tus propias</h1>
         <h1 className="text-yellow-100 text-6xl font-extrabold">Recetas</h1>
         <p className="text-white text-3xl font-bold pt-5 text-center">
@@ -23,7 +23,7 @@ const Home = ({ changeview }) => {
         <img
           src="../Homeimg.png"
           alt="food pic"
-          className="items-center justify-center h-auto w-full"
+          className="items-center justify-center h-auto w-full "
         />
       </div>
     </section>

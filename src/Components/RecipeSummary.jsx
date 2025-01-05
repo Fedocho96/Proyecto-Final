@@ -1,7 +1,17 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 const RecipeSummary = ({ newrecipe, setNewRecipe }) => {
+  const [valorntotal, setValorntotal] = useState(0);
+  const [recipeName, setRecipeName] = useState(""); // Estado para almacenar el nombre de la receta
 
+  useEffect(() => {
+    const valortotal = newrecipe.reduce(
+      (acc, ingredient) => acc + ingredient.id,
+      0
+    );
+    setValorntotal(valortotal);
+  }, [newrecipe]);
 
   const deleteIngredient = (ingredientToDelete) => {
     setNewRecipe((prevRecipe) => {
@@ -9,28 +19,61 @@ const RecipeSummary = ({ newrecipe, setNewRecipe }) => {
     });
   };
 
+  /*Local Storage */
+  const añadirReceta = () => {
+    let misRecetas = JSON.parse(localStorage.getItem("recetas")) || [];
+
+    // Crear un objeto con el nombre de la receta y los ingredientes
+    const recetaCompleta = {
+      nombre: recipeName,
+      valorn: valorntotal,
+      ingredientes: newrecipe,
+    };
+
+    misRecetas.push(recetaCompleta);
+
+    // Guardar nuevamente en localStorage
+    localStorage.setItem("recetas", JSON.stringify(misRecetas));
+    console.log("Receta guardada:", recetaCompleta);
+
+    // Limpiar el estado del nombre después de guardar
+    setRecipeName("");
+  };
+
   return (
     <div className=" rounded-xl h-full w-4/5 flex flex-col items-center">
       <div className="rounded-xl h-auto flex flex-col items-center justify-center p-2">
         <h1 className="text-white text-7xl font-semibold">
-          Tu <a className="text-orange-400 font-extrabold">RECETA</a>
+          Tu <a className="text-orange-400 font-extrabold ">RECETA</a>
         </h1>
-        <h2 className="text-white text-3xl">Elige el nombre para tu receta</h2>
+        <h2 className="text-white text-3xl text">
+          Elige el nombre para tu receta
+        </h2>
         <div className="mt-1 h-2 w-44 bg-orange-400 lg:-rotate-1" />
       </div>
 
-      <div className="h-auto flex flex-col items-center justify-center p-2">
-        <div className="flex justify-center items-center gap-2">
-          <div className="flex flex-col mt-3">
-            <div className="w-72 mb-1">
-              <input
-                id="recipeName"
-                type="text"
-                placeholder="Escribe el nombre de tu receta..."
-                className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-              />
+      <div className="flex justify-center items-center gap-1">
+        <div className="h-auto flex flex-col items-center justify-center p-2">
+          <div className="flex justify-center items-center gap-2">
+            <div className="flex flex-col mt-3">
+              <div className="w-72 mb-1">
+                <input
+                  id="recipeName"
+                  type="text"
+                  value={recipeName}
+                  onChange={(e) => setRecipeName(e.target.value)} // Actualiza el nombre de la receta
+                  placeholder="Escribe el nombre de tu receta..."
+                  className="w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                />
+              </div>
             </div>
           </div>
+        </div>
+
+        <div className="h-auto flex items-center justify-center p-2 mt-1">
+          <p className="text-white text-2xl flex items-center justify-center ">
+            El valor nutricional de tu receta es: {valorntotal}
+          </p>
         </div>
       </div>
 
@@ -58,7 +101,7 @@ const RecipeSummary = ({ newrecipe, setNewRecipe }) => {
                 {ingredient.name}
               </p>
               <p className="text-gray-800 font-medium text-lg text-center">
-                Cantidad: 
+                Cantidad:
                 <p className="text-xl">{ingredient.cantidad}</p>
               </p>
               <p className="text-black-600 text-center text-xl">
@@ -85,7 +128,10 @@ const RecipeSummary = ({ newrecipe, setNewRecipe }) => {
         </button>
       </div>
 
-      <button className="my-5 bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-6 rounded-md transition">
+      <button
+        onClick={añadirReceta}
+        className="my-5 bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-6 rounded-md transition"
+      >
         CREAR RECETA
       </button>
     </div>

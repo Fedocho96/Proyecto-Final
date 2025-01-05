@@ -36,8 +36,8 @@ const IngredientList = ({ addingredient }) => {
   };
 
   return (
-    <div className=" h-5/6 w-2/5 flex flex-col items-center pt-5">
-      <h1 className="text-white text-6xl font-semibold "> INGREDIENTES </h1>
+    <div className=" h-5/6 w-full lg:w-2/5 flex flex-col items-center pt-5">
+      <h1 className="text-white text-5xl font-semibold "> INGREDIENTES </h1>
       <h2 className="text-white text-3xl">Elige tus ingredientes</h2>
       <div className="mt-1 h-2 w-32 bg-orange-400 lg:-rotate-3" />
 
