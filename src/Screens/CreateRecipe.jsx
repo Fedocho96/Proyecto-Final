@@ -5,6 +5,7 @@ import RecipeBuilder from "../Components/RecipeBuilder";
 import RecipeSummary from "../Components/RecipeSummary";
 
 const CreateRecipe = ({ changeview }) => {
+  
   //estados de ingredientes seleccionados
   const [newrecipe, setNewRecipe] = useState([]); // Nueva receta
 
@@ -29,7 +30,7 @@ const CreateRecipe = ({ changeview }) => {
         Mis Recetas
       </button>
 
-      <div className="h-full lg:h-screen w-full flex flex-col lg:flex-row items-center lg:justify-around gap-3 ">
+      <div className="h:full lg:h-screen w-full flex flex-col lg:flex-row items-center lg:justify-around gap-3 ">
         {/*Tarjeta de seleccion de ingredientes*/}
         <IngredientList addingredient={addingredient} />
 

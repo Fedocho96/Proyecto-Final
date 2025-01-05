@@ -1,6 +1,8 @@
 import React from "react";
 
 const RecipeBuilder = ({ newrecipe, setNewRecipe }) => {
+
+  //funcion para añadir cantidad a un ingrediente
   const addqty = (ingredient) => {
     setNewRecipe((prevRecipe) => {
       return prevRecipe.map((item) => {
@@ -12,6 +14,7 @@ const RecipeBuilder = ({ newrecipe, setNewRecipe }) => {
     });
   };
 
+  //funcion para restar cantidad a un ingrediente o eliminarlo de la lista
   const resqty = (ingredient) => {
     setNewRecipe((prevRecipe) => {
       return prevRecipe
@@ -33,6 +36,7 @@ const RecipeBuilder = ({ newrecipe, setNewRecipe }) => {
       </h2>
       <div className="mt-1 h-2 w-32 bg-orange-400 lg:-rotate-3" />
 
+      {/*lista de ingredientes agregados para cambiar cantidades*/}
       <div className="h-5/6 w-full max-w-xl px-4 mb-4 mt-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/50 scrollbar-track-black/30  rounded-lg shadow-lg">
         <ul className="space-y-4 w-full flex flex-col items-center">
           {newrecipe.map((ingredient) => (

@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import fetchIngredients from "../Apifunctions/fetchIngredients";
 
 const IngredientList = ({ addingredient }) => {
+
   //estados de busqueda de ingredientes
   const [query, setQuery] = useState(""); // Búsqueda por texto
   const [sortType, setSortType] = useState("name"); // Tipo de filtro
   const [ingredients, setIngredients] = useState([]); // Resultados de búsqueda
   const [error, setError] = useState("");
 
-  // Opciones para ordenar los ingredientes
+  // Opciones para filtrar los ingredientes
   const sortOptions = [
     { id: "popularity", label: "Popularity" },
     { id: "calories", label: "Calories" },
@@ -101,7 +102,7 @@ const IngredientList = ({ addingredient }) => {
       ) : (
 <div className="h-5/6 w-full max-w-xl px-4 mb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/50 scrollbar-track-black/30  rounded-lg shadow-lg">
   {/* Lista de ingredientes */}
-  <ul className="mt-2 space-y-4 w-full flex flex-col items-center">
+  <ul className="mt-2 space-y-4 w-full flex flex-col items-center ">
     {ingredients.map((ingredient) => (
       <li
         key={ingredient.id}

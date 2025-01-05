@@ -4,8 +4,10 @@ import CreateRecipe from "./Screens/CreateRecipe";
 import RecipeHistory from "./Screens/RecipeHistory";
 
 function App() {
+  //Estado que actualiza la vista actual
   const [actualview, setActualView] = useState("Home");
 
+  //Función que cambia la vista actual
   function changeview(id) {
     setActualView(id);
   }

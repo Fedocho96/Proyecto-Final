@@ -1,11 +1,6 @@
 const API_KEY = "d099f99b3925437494a13eb387ff273c";
 
-/**
- * Fetch a list of ingredients from Spoonacular API based on a query.
- * @param {string} query - The search term for the ingredient (e.g., 'tomato', 'chicken').
- * @param {number} number - The number of results to return (default is 10).
- * @returns {Promise<Array>} - Returns an array of ingredient objects.
- */
+//Función que obtiene los ingredientes de la API
 const fetchIngredients = async (query, sortType, number = 15) => {
   try {
     const baseUrl = "https://api.spoonacular.com/food/ingredients/search";
@@ -19,7 +14,7 @@ const fetchIngredients = async (query, sortType, number = 15) => {
 
     const data = await response.json();
 
-    // Extract and return the ingredients list
+    // extrae los resultados de la respuesta
     return data.results || [];
   } catch (error) {
     console.error("Failed to fetch ingredients:", error.message);

@@ -16,10 +16,9 @@ const RecipeHistory = ({ changeview }) => {
     const loadRecetas = () => {
       const listarecetas = JSON.parse(localStorage.getItem("recetas")) || [];
       setRecetas(listarecetas);
-      console.log("Recetas cargadas:", recetas);
     };
 
-    // Cargar recetas inicialmente
+    // Cargar recetas al iniciar el componente
     loadRecetas();
 
     // Agregar un event listener para escuchar los cambios en el localStorage
@@ -59,6 +58,8 @@ const RecipeHistory = ({ changeview }) => {
           ‹
         </button>
 
+        {/*carousel de recetas*/}
+
         <div className="carousel h-full w-full overflow-x-auto scroll-smooth scrollbar-hide flex gap-x-4 justify-start items-center px-2 ">
           {recetas.map((receta) => (
             <div
@@ -71,7 +72,7 @@ const RecipeHistory = ({ changeview }) => {
                 </h1>
               </div>
 
-              {/* Lista de Ingredientes con scroll */}
+              {/* Lista de Ingredientes con scroll y el componente de tarjetas */}
               <h2 className="text-2xl font-semibold mb-2">Ingredientes</h2>
               <RecipeCard receta={receta} />
 
